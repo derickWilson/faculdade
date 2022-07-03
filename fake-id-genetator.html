@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Fake ID generator</title>
+		<script src="vue.js"></script>
+		<style type="text/css">
+		
+		body{
+		background-color:#1d082a;
+		}
+		div{
+			margin-left: 380px;
+			border: 7px #68bf7e solid;
+			margin-top: 160px;
+			background-color: rgb(65, 119, 57);
+			width: 60%;
+		}
+		
+		.foto{
+			float: left;
+			height: 300px;
+			width: 200px;
+			margin-right: 10px;
+		}
+
+		.clear{
+			clear: both;
+		}
+
+		center button{
+			margin-bottom: 5px;
+			height: 40px;
+			width: 150px;
+			font-size: 15px;
+		}
+
+		a:hover{
+			color: blue;
+		}
+
+		a{
+			color: blue;
+		}
+		a:visited{
+			color: blue;
+		}
+
+		</style>
+	</head>
+	<body>
+
+			<div id="app">
+			<img class="foto" src="https://cdn-icons-png.flaticon.com/512/21/21104.png">
+			<hr>
+			<p><a href="https://thispersondoesnotexist.com/" target="blank" v-bind:title="textoHelp">crie o rosto</a> (se necessario use F5 na pagina para criar outro)</p>
+			<p>Seu Nome : {{fnome}}</p>
+			<p>sua cidade : {{fcidade}}</p>
+			<p>seu cpf : {{CPF}}</p>
+			<p>seu rg : {{RG}}</p>
+			<p><a href="https://www.guerrillamail.com/pt/" target="_blank">email temporario</a></p>
+			<hr class="clear">
+			<center><button v-on:click="generateID">Nova Identidade</button></center>
+		</div>
+		<script>
+			var app = new Vue({
+				el: '#app',
+				data:{
+					nomes:[
+						'Miguel','Arthur',
+						'Gael','Heitor',
+						'Theo','Davi', 
+						'Gabriel','Bernardo', 
+						'Samuel','Joao Miguel',
+						'Helena','Alice',
+						'Laura','Maria Alice',
+						'Valentina','Heloisa',
+						'Maria Clara','Maria Cecilia',
+						'Maria Julia','Sophia','Rogerio'
+					],
+
+					sobrenomes:[
+					'Silva','Santos',
+					'Souza','Oliveira',
+					'Rodrigues','Rernando',
+					'Wilson','Monteiro',
+					'Ferreira','Alves',
+					'Pereira','Lima',
+					'Gomes','Carvalho',
+					'Costa','Soares','Ceni'
+					],
+
+					cidades:[
+					'Rio Branco - AC',
+					'Maceio - AL',
+					'Macapa - AP',
+					'Manaus - AM',
+					'Salvador - BA',
+					'Fortaleza - CE',
+					'Brasilia - DF',
+					'Vitoria - ES',
+					'Goiania - GO',
+					'Sao Luis - MA',
+					'Cuiaba - MT',
+					'Campo Grande - MS',
+					'Belo Horizonte - MG',
+					'Belem - PA',
+					'Joao Pessoa - PB',
+					'Curitiba - PR',
+					'Recife - PE',
+					'Teresina - PI',
+					'Rio de Janeiro - RJ',
+					'Natal - RN',
+					'Porto Alegre - RS',
+					'Porto Velho - RO',
+					'Boa Vista - RR',
+					'Florianopolis - SC',
+					'Sao Paulo - SP',
+					'Aracaju - SE',
+					'Palmas - TO'
+					],
+
+					fcidade: '',
+					fnome: '',
+					CPF: '',
+					RG: '',
+
+					textoHelp:'crie um rosto aleatorio'
+
+				},
+
+				methods:{
+					rndNome:function(){
+						rndnum1 = Math.round(Math.random()*(this.nomes.length))
+						this.fnome = this.nomes[rndnum1]+' '+this.sobrenomes[Math.floor((Math.random()*(this.sobrenomes.length)))]
+					},
+
+					rndCidade:function(){
+						tamCidade = this.cidades.length
+						this.fcidade = this.cidades[Math.floor((Math.random()*tamCidade))]
+					},
+					randCPF:function(){
+
+
+						num2 = Math.round((Math.random()*800)+100)
+						num1 = Math.round((Math.random()*800)+100)
+						num3 = Math.round((Math.random()*800)+100)
+						num4 = Math.floor((Math.random()*100))
+
+						texCPF = String(num1)+'.'+String(num2)+'.'+String(num3)+'/'+num4
+
+						this.CPF = texCPF
+					},
+
+					randRG:function(){
+						num1 = Math.round((Math.random()*90)+10)
+						num2 = Math.round((Math.random()*899)+100)
+						num3 = Math.round((Math.random()*899)+100)
+						num4 = Math.round((Math.random()*9)+1)
+						texRG = String(num1)+'.'+String(num2)+'.'+String(num3)+'-'+num4
+
+						this.RG = texRG
+					},
+
+					generateID:function(){
+						this.rndCidade()
+						this.randRG()
+						this.randCPF()
+						this.rndNome()
+					}
+				}
+				
+			});
+		</script>
+	</body>
+</html>
